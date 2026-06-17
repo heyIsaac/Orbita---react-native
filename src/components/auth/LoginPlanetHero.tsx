@@ -13,7 +13,9 @@ import {
  *   assets/images/login-planet.png
  */
 const LOGIN_PLANET = require('../../../assets/images/login-planet.png');
-const { width: PLANET_WIDTH, height: PLANET_HEIGHT } = Image.resolveAssetSource(LOGIN_PLANET);
+const assetSource = typeof Image.resolveAssetSource === 'function' ? Image.resolveAssetSource(LOGIN_PLANET) : null;
+const PLANET_WIDTH = assetSource?.width ?? 1;
+const PLANET_HEIGHT = assetSource?.height ?? 1;
 const PLANET_ASPECT_RATIO = PLANET_WIDTH / PLANET_HEIGHT;
 
 export function LoginPlanetHero() {

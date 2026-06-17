@@ -3,6 +3,7 @@ const { getDefaultConfig } = require('expo/metro-config');
 const { withTamagui } = require('@tamagui/metro-plugin');
 
 const maskedViewStub = path.resolve(__dirname, 'src/shims/MaskedViewStub.tsx');
+const pagerViewStub = path.resolve(__dirname, 'src/shims/PagerViewStub.tsx');
 
 const config = getDefaultConfig(__dirname);
 
@@ -22,6 +23,13 @@ tamaguiConfig.resolver.resolveRequest = (context, moduleName, platform) => {
   ) {
     return {
       filePath: maskedViewStub,
+      type: 'sourceFile',
+    };
+  }
+
+  if (platform === 'web' && moduleName === 'react-native-pager-view') {
+    return {
+      filePath: pagerViewStub,
       type: 'sourceFile',
     };
   }
